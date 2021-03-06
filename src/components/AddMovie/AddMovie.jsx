@@ -1,4 +1,14 @@
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+
 function AddMovie() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch({ type: 'FETCH_GENRES' });
+  }, [])
   return(
     <>
       <h2>Add a Movie to the List!</h2>
