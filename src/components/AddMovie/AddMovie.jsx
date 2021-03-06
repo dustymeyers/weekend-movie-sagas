@@ -19,14 +19,20 @@ function AddMovie() {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
 
+  const handleCancelButton = () => {
+    history.push('/');
+  } // end handleCancelButton
+
   const saveMovie = (event) => {
     event.preventDefault();
-    
+
     dispatch({
       type: 'ADD_MOVIE',
       payload: newMovie
     });
-  }
+
+    history.push('/');
+  } // end saveMovie
 
   return(
     <>
@@ -75,7 +81,7 @@ function AddMovie() {
           ></textarea>
         </label>
       
-        <button>Cancel</button>
+        <button onClick={handleCancelButton}>Cancel</button>
         <button onClick={saveMovie}>Save</button>
       </form>
     </>
