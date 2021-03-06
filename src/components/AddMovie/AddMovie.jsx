@@ -11,7 +11,7 @@ function AddMovie() {
   const [newMovie, setNewMovie] = useState({
     title: '',
     poster: '',
-    genreId: '',
+    genre_id: '',
     description: ''
   });
   
@@ -19,8 +19,9 @@ function AddMovie() {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
 
-  const saveMovie = () => {
-
+  const saveMovie = (event) => {
+    event.preventDefault();
+    
     dispatch({
       type: 'ADD_MOVIE',
       payload: newMovie
@@ -54,8 +55,8 @@ function AddMovie() {
         <label>
           Add the Movie's Genre:
           <select 
-            value={newMovie.genreId} 
-            onChange={event => setNewMovie({...newMovie, genreId: event.target.value})}
+            value={newMovie.genre_id} 
+            onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
           >
             <option value="" disabled>Pick One</option>
             {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
