@@ -33,13 +33,18 @@ function* fetchAllMovies() {
 
 function* fetchMovieDetails(action) {
   console.log('action.payload', action.payload);
+  
+  // movieId from poster click, will be used as URL Param
+  const movieId = action.payload;
+
   // get movie details associated with movieId
   // title, description, poster, genres
-  // try{
-  //   const movieDetails = yield axios.get(`/api/details/${action.payload}`)
-  // } catch (err) {
-  //   console.log('Error getting movie details', err);
-  // }
+  try{
+    const movieDetails = yield axios.get(`/api/details/${movieId}`);
+    console.log('get movie details:', movieDetails.data);
+  } catch (err) {
+    console.log('Error getting movie details', err);
+  }
 }
 
 // Create sagaMiddleware
