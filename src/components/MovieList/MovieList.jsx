@@ -13,6 +13,10 @@ function MovieList() {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
 
+    const handleAddMovie = () => {
+      history.push('/addMovie')
+    } // end handleAddMovie
+
     const handlePosterClick = (movieId) => {
       console.log('poster clicked', movieId);
       // sends movieId to our generator function that will
@@ -30,6 +34,7 @@ function MovieList() {
     return (
         <main>
             <h1>MovieList</h1>
+            <button onClick={handleAddMovie}>Add a Movie</button>
             <section className="movies">
                 {movies.map(movie => {
                     return (

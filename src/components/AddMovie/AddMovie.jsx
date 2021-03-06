@@ -38,7 +38,7 @@ function AddMovie() {
           Add the Movie's Description:
           <textarea placeholder="Movie Description" rows="4" cols ="50"></textarea>
         </label>
-
+      
         <button>Cancel</button>
         <button>Save</button>
       </form>
