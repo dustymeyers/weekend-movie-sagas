@@ -6,14 +6,18 @@ function AddMovie() {
   const history = useHistory();
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
+
+  // local states for form input handling
+  const [selectGenre, setSelectGenre] = useState('');
+  const [posterInput, setPosterInput] = useState('');
+  const [titleInput, setTitleInput] = useState('');
+  const [descriptionInput, setDescriptionInput] = useState('');
   
   useEffect(() => {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
 
-  const handleGenrePicker = (event) => {
-    console.log('event is:', event);
-  }
+
 
   return(
     <>
@@ -21,41 +25,45 @@ function AddMovie() {
       <form>
         <label>
           Add the Movie's Title:
-          <input type="text" placeholder="Title of Movie" />
+          <input 
+            value={titleInput} 
+            onChange={(event) => setTitleInput(event.target.value)}
+            type="text" 
+            placeholder="Title of Movie" 
+          />
         </label>
 
         <label>
           Upload the Movie's Poster:
-          <input type="text" placeholder="Image Address" />
+          <input 
+            value={posterInput}
+            onChange={(event) => setPosterInput(event.target.value)}
+            type="text" 
+            placeholder="Image Address" 
+          />
         </label>
         
         <label>
           Add the Movie's Genre:
-          <select onChange={(event) => handleGenrePicker(event)}>
-            <option value="">Pick One</option>
+          <select 
+            value={selectGenre} 
+            onChange={(event) => setSelectGenre(event.target.value)}
+          >
+            <option value="" disabled>Pick One</option>
             {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
-
-            {/* <option>Pick One</option>
-            <option>Adventure</option>
-            <option>Animated</option>
-            <option>Biographical</option>
-            <option>Comedy</option>
-            <option>Disaster</option>
-            <option>Drama</option>
-            <option>Epic</option>
-            <option>Fantasy</option>
-            <option>Musical</option>
-            <option>Romantic</option>
-            <option>Science Fiction</option>
-            <option>Space-Opera</option>
-            <option>Superhero</option> */}
           </select>
         </label>
 
         <br/>
         <label>
           Add the Movie's Description:
-          <textarea placeholder="Movie Description" rows="4" cols ="50"></textarea>
+          <textarea 
+            value={descriptionInput}
+            onChange={(event) => setDescriptionInput(event.target.value)}
+            placeholder="Movie Description" 
+            rows="4" 
+            cols ="50"
+          ></textarea>
         </label>
       
         <button>Cancel</button>
