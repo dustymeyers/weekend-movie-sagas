@@ -18,10 +18,11 @@ function MovieList() {
       // sends movieId to our generator function that will
       // use an axios GET to fetch movie details for movieId
       // including genres
+      
       dispatch({ 
         type: 'FETCH_MOVIE_DETAILS',
         payload: movieId
-      })
+      });
 
       history.push('/details');
     }
