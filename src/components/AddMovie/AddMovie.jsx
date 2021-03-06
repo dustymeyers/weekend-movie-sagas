@@ -38,12 +38,32 @@ function AddMovie() {
         text: 'Please fill out each input before submission.'
       });
     } else {
-    dispatch({
-      type: 'ADD_MOVIE',
-      payload: newMovie
-    });
+    swal({
+      title: "Ready to Add?",
+      text: "Do you want to look at your submission once more before completion?",
+      icon: "info",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willAdd) => {
+      if (willAdd) {
+        dispatch({
+          type: 'ADD_MOVIE',
+          payload: newMovie
+        });
 
-    history.push('/');
+        swal({
+          title: "Your movie has been added!",
+          icon: "success",
+        });
+        
+        history.push('/');
+      } else {
+        swal("Add a movie when you're ready.");
+      }
+    });
+    
+    
     }
   } // end saveMovie
 
