@@ -14,8 +14,8 @@ router.get('/:id', (req, res) => {
    * Query should look like:
    * 
    * SELECT 
-   *    movies.title, 
-   *    JSON_AGG(genres.name) genres 
+   *    movies.*, 
+   *    JSON_AGG(genres.name) genres -- Puts all associated genres into an array row
    * FROM 
    *    movies
    * JOIN movies_genres 
@@ -23,15 +23,15 @@ router.get('/:id', (req, res) => {
    * JOIN genres 
    *    ON movies_genres.genre_id = genres.id
    * WHERE 
-   *    movies.id = 12
+   *    movies.id = 3
    * GROUP BY 
-   *    movies.title;
+   *    movies.id;
    */
 
   const queryText = `
     SELECT 
-      movies.title, 
-      JSON_AGG(genres.name) genres -- Puts all associated genres into an array row
+      movies.*, 
+      JSON_AGG(genres.name) genres 
     FROM 
       movies
     JOIN movies_genres 
@@ -40,14 +40,22 @@ router.get('/:id', (req, res) => {
       ON movies_genres.genre_id = genres.id
     WHERE 
       movies.id = $1
-    GROUP BY movies.title;
+    GROUP BY 
+      movies.id;
   `;
 
   pool.query(queryText, [movieId])
     .then(result => {
       console.log(`GET /api/details/${movieId} RETURNED:`, result.rows);
-      // result.rows looks like:
-      // [ { title: 'Avatar', genres: [ 'Adventure', 'Biographical', 'Comedy' ] } ]
+      /* result.rows looks like:
+       * [ {
+       * "id": 3,
+       * "title": "Captain Marvel",
+       * "poster": "images/captain-marvel.jpg",
+       * "description": "Captain Marvel is a 2019 American superhero film...",
+       * "genres": [ "Biographical" ]
+       * } ]
+       */
       res.send(result.rows[0]);
     })
     .catch(err => {
