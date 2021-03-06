@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
 function MovieList() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
 
@@ -20,6 +22,8 @@ function MovieList() {
         type: 'FETCH_MOVIE_DETAILS',
         payload: movieId
       })
+
+      history.push('/details');
     }
 
     return (
