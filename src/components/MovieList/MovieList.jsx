@@ -25,7 +25,7 @@ function MovieList() {
       });
 
       history.push('/details');
-    }
+    } // end handlePosterClick
 
     return (
         <main>

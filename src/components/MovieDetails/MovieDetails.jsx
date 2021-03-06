@@ -14,28 +14,26 @@ function MovieDetails() {
   const altImgText = `Poster for the movie ${movieTitle}`;
   const movieGenresArray = movieDetails.genres;
   const movieDescription = movieDetails.description;
-  console.log(movieGenresArray);
 
   return(
-    <>
+    <main>
       <h2>{movieTitle}</h2>
       <img src={moviePosterImage} alt={altImgText} />
       <h3>Genres:</h3>
       <h3>
-        {movieGenresArray
-          ? movieGenresArray.map((genre, index) => {
-              if (movieGenresArray.length - index === 1 ) {
-                return <span key={index}>{genre}</span>;
-              } else {
-                return <span key={index}>{genre}, </span>;
-              }
-            })
-          : <span>no genres</span>}
+        {movieGenresArray ?
+          movieGenresArray.map((genre, index) => {
+            // serializes commas, checking if the genre is the last item in the array 
+            return movieGenresArray.length - index === 1 ? 
+              <span key={index}>{genre}</span> :
+              <span key={index}>{genre}, </span>;
+          }) :
+          <span>No Genres Listed</span>}
       </h3>
 
       <p>{movieDescription}</p>
       
-    </>
+    </main>
   );
 } // end MovieDetails
 
