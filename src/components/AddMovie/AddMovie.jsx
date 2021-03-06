@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
+
 
 function AddMovie() {
   const history = useHistory();
@@ -25,19 +27,30 @@ function AddMovie() {
 
   const saveMovie = (event) => {
     event.preventDefault();
-
+    if (
+      newMovie.title === '' || 
+      newMovie.poster === '' || 
+      newMovie.genre_id === '' || 
+      newMovie.description === ''
+    ) {
+      return swal({
+        title: 'Seems you forgot something.',
+        text: 'Please fill out each input before submission.'
+      });
+    } else {
     dispatch({
       type: 'ADD_MOVIE',
       payload: newMovie
     });
 
     history.push('/');
+    }
   } // end saveMovie
 
   return(
     <>
       <h2>Add a Movie to the List!</h2>
-      <form>
+      <form id="add-movie-form">
         <label>
           Add the Movie's Title:
           <input 
@@ -45,6 +58,7 @@ function AddMovie() {
             onChange={event => setNewMovie({...newMovie, title: event.target.value})}
             type="text" 
             placeholder="Title of Movie" 
+            required
           />
         </label>
 
@@ -53,8 +67,9 @@ function AddMovie() {
           <input 
             value={newMovie.poster}
             onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
-            type="text" 
+            type="url" 
             placeholder="Image Address" 
+            required
           />
         </label>
         
@@ -63,6 +78,7 @@ function AddMovie() {
           <select 
             value={newMovie.genre_id} 
             onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
+            required
           >
             <option value="" disabled>Pick One</option>
             {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
@@ -78,12 +94,12 @@ function AddMovie() {
             placeholder="Movie Description" 
             rows="4" 
             cols ="50"
+            required
           ></textarea>
         </label>
-      
-        <button onClick={handleCancelButton}>Cancel</button>
-        <button onClick={saveMovie}>Save</button>
       </form>
+      <button form="add-movie-form" onClick={handleCancelButton}>Cancel</button>
+      <button onClick={saveMovie}>Save</button>
     </>
   );
 } // end AddMovie
