@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
   const queryText = `
     SELECT 
       movies.title, 
-      JSON_AGG(genres.name) genres 
+      JSON_AGG(genres.name) genres -- Puts all associated genres into an array row
     FROM 
       movies
     JOIN movies_genres 
@@ -46,10 +46,13 @@ router.get('/:id', (req, res) => {
   pool.query(queryText, [movieId])
     .then(result => {
       console.log(`GET /api/details/${movieId} RETURNED:`, result.rows);
-      res.send(result.rows);
+      // result.rows looks like:
+      // [ { title: 'Avatar', genres: [ 'Adventure', 'Biographical', 'Comedy' ] } ]
+      res.send(result.rows[0]);
     })
     .catch(err => {
       console.log(`ERROR GET /api/details/${movieId} FAILED:`, err);
+
       res.sendStatus(500);
     })
 });
