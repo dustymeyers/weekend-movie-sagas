@@ -8,16 +8,24 @@ function AddMovie() {
   const genres = useSelector(store => store.genres);
 
   // local states for form input handling
-  const [selectGenre, setSelectGenre] = useState('');
-  const [posterInput, setPosterInput] = useState('');
-  const [titleInput, setTitleInput] = useState('');
-  const [descriptionInput, setDescriptionInput] = useState('');
+  const [newMovie, setNewMovie] = useState({
+    title: '',
+    poster: '',
+    genreId: '',
+    description: ''
+  });
   
   useEffect(() => {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
 
+  const saveMovie = () => {
 
+    dispatch({
+      type: 'ADD_MOVIE',
+      payload: newMovie
+    });
+  }
 
   return(
     <>
@@ -26,8 +34,8 @@ function AddMovie() {
         <label>
           Add the Movie's Title:
           <input 
-            value={titleInput} 
-            onChange={(event) => setTitleInput(event.target.value)}
+            value={newMovie.title} 
+            onChange={event => setNewMovie({...newMovie, title: event.target.value})}
             type="text" 
             placeholder="Title of Movie" 
           />
@@ -36,8 +44,8 @@ function AddMovie() {
         <label>
           Upload the Movie's Poster:
           <input 
-            value={posterInput}
-            onChange={(event) => setPosterInput(event.target.value)}
+            value={newMovie.poster}
+            onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
             type="text" 
             placeholder="Image Address" 
           />
@@ -46,8 +54,8 @@ function AddMovie() {
         <label>
           Add the Movie's Genre:
           <select 
-            value={selectGenre} 
-            onChange={(event) => setSelectGenre(event.target.value)}
+            value={newMovie.genreId} 
+            onChange={event => setNewMovie({...newMovie, genreId: event.target.value})}
           >
             <option value="" disabled>Pick One</option>
             {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
@@ -58,8 +66,8 @@ function AddMovie() {
         <label>
           Add the Movie's Description:
           <textarea 
-            value={descriptionInput}
-            onChange={(event) => setDescriptionInput(event.target.value)}
+            value={newMovie.description}
+            onChange={event => setNewMovie({...newMovie, description: event.target.value})}
             placeholder="Movie Description" 
             rows="4" 
             cols ="50"
@@ -67,7 +75,7 @@ function AddMovie() {
         </label>
       
         <button>Cancel</button>
-        <button>Save</button>
+        <button onClick={saveMovie}>Save</button>
       </form>
     </>
   );
