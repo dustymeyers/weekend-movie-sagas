@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 /**
  * MovieDetails Renders the Details of
@@ -7,6 +8,7 @@ import { useSelector } from 'react-redux';
  */
 
 function MovieDetails() {
+  const history = useHistory();
   const movieDetails = useSelector(store => store.movieDetails);
   
   const movieTitle = movieDetails.title;
@@ -14,6 +16,12 @@ function MovieDetails() {
   const altImgText = `Poster for the movie ${movieTitle}`;
   const movieGenresArray = movieDetails.genres;
   const movieDescription = movieDetails.description;
+
+  const handleClick = () => {
+    console.log('clicked back button');
+
+    history.push('/');
+  }
 
   return(
     <main>
@@ -32,6 +40,7 @@ function MovieDetails() {
       </h3>
 
       <p>{movieDescription}</p>
+      <button onClick={handleClick}>Back to List</button>
       
     </main>
   );
