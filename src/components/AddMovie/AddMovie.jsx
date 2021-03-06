@@ -5,10 +5,16 @@ import { useHistory } from 'react-router-dom';
 function AddMovie() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const genres = useSelector(store => store.genres);
   
   useEffect(() => {
     dispatch({ type: 'FETCH_GENRES' });
-  }, [])
+  }, []);
+
+  const handleGenrePicker = (event) => {
+    console.log('event is:', event);
+  }
+
   return(
     <>
       <h2>Add a Movie to the List!</h2>
@@ -25,8 +31,11 @@ function AddMovie() {
         
         <label>
           Add the Movie's Genre:
-          <select>
-            <option>Pick One</option>
+          <select onChange={(event) => handleGenrePicker(event)}>
+            <option value="">Pick One</option>
+            {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
+
+            {/* <option>Pick One</option>
             <option>Adventure</option>
             <option>Animated</option>
             <option>Biographical</option>
@@ -39,7 +48,7 @@ function AddMovie() {
             <option>Romantic</option>
             <option>Science Fiction</option>
             <option>Space-Opera</option>
-            <option>Superhero</option>
+            <option>Superhero</option> */}
           </select>
         </label>
 
