@@ -104,9 +104,15 @@ function EditMovieDetails() {
             swal({
               title: "Your movie has been updated!",
               icon: "success",
-            });
-            
-            history.push('/');
+            })
+              .then(() => history.push(`/description/${paramsObject.id}`))
+              .catch(() => {
+                swal({
+                  title: "It looks like something went wrong.",
+                  text: "Please wait a few minutes and try again.",
+                  icon: "warning"
+                })
+              });
           } else { 
             swal("Save the movie when you're ready.");
           }

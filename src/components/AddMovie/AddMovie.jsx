@@ -98,9 +98,15 @@ function AddMovie() {
           swal({
             title: "Your movie has been added!",
             icon: "success",
+          })
+          .then(() => history.push('/'))
+          .catch(() => {
+            swal({
+              title: "It looks like something went wrong.",
+              text: "Please wait a few minutes and try again.",
+              icon: "warning"
+            })
           });
-          
-          history.push('/');
         } else { 
           swal("Add a movie when you're ready.");
         }
