@@ -94,7 +94,7 @@ function MovieList() {
           </Grid>
 
           <Grid item xs={12}>
-            <Paper elevation={4} className={classes.listWrapper}>
+            <Paper elevation={5} className={classes.listWrapper}>
               <Grid 
                 container 
                 alignItems="center" 

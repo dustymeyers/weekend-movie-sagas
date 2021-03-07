@@ -1,6 +1,16 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
+// Material-Ui
+import {
+  Button,
+  Grid,
+  Paper,
+  Typography
+} from '@material-ui/core';
+
+// Material-Ui Styling
+
 /**
  * MovieDetails Renders the Details of
  * the Movie Poster Previously Clicked
@@ -24,27 +34,43 @@ function MovieDetails() {
   }
 
   return(
-    <main>
-      <h2>{movieTitle}</h2>
-      <img src={moviePosterImage} alt={altImgText} />
+    <Paper elevation={5}>
+      <Grid container justify="center" spacing={5}> 
+          
+          <Grid item xs={12}>      
+            <Typography variant="h2">{movieTitle}</Typography>
+          </Grid>
 
-      <h3>
-        Genres:
-        {movieGenresArray ?
-          movieGenresArray.map((genre, index) => {
-            // serializes commas, checking if the genre is the last item in the array 
-            return movieGenresArray.length - index === 1 ? 
-              <span key={index}> {genre}</span> :
-              <span key={index}> {genre}, </span>;
-          }) :
-          <span>No Genres Listed</span>}
-      </h3>
+          <Grid item xs={4} >
+            <Paper elevation={2}>
+              <img src={moviePosterImage} alt={altImgText} />
+            </Paper>
+          </Grid>
 
-      <p>{movieDescription}</p>
+          <Grid item xs={12}>
+            <Typography variant="h4">
+              Genres:
+              {movieGenresArray ?
+                movieGenresArray.map((genre, index) => {
+                  // serializes commas, checking if the genre is the last item in the array 
+                  return movieGenresArray.length - index === 1 ? 
+                    <span key={index}> {genre}</span> :
+                    <span key={index}> {genre}, </span>;
+                }) :
+                <span>No Genres Listed</span>}
+            </Typography>
+          </Grid>
 
-      <button onClick={handleClick}>Back to List</button>
-      
-    </main>
+          <Grid item>
+            <Typography variant="body1">{movieDescription}</Typography>
+          </Grid>
+
+          <Grid item>
+            <Button color="primary" variant="contained" onClick={handleClick}>Back to List</Button>
+          </Grid>
+        
+      </Grid>
+    </Paper>
   );
 } // end MovieDetails
 
