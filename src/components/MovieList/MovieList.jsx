@@ -33,7 +33,10 @@ const useStyles = makeStyles((theme) => ({
   movieListTitle: {
     color: '#FFFFFF',
     padding: '1rem',
-  }
+  },
+  addMovieButton: {
+    margin: '2rem'
+  },
 
 }));
 
