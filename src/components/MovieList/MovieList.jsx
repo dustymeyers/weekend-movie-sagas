@@ -21,7 +21,6 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    background:'linear-gradient(45deg, #564d4d 30%, #831010 90%)'
   }, 
   movieCard: {
     height: 350,
@@ -31,12 +30,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%',
   },
   movieListTitle: {
-    color: '#FFFFFF',
+    marginTop: '2rem',
     padding: '1rem',
   },
   addMovieButton: {
     margin: '2rem'
   },
+  listWrapper: {
+    background:'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
+    margin: '1rem',
+    padding: '.75rem'
+  }
 
 }));
 
@@ -70,9 +74,10 @@ function MovieList() {
 
     return (
         <Grid container className={classes.root} spacing={2}> 
-
+          
           <Grid item xs={12}>
             <Grid justify="center" container>
+
               <Grid item xs={12}>
                 <Typography variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
               </Grid>
@@ -87,38 +92,39 @@ function MovieList() {
                   Add a Movie
                 </Button>
               </Grid>
+
             </Grid>
           </Grid>
 
           <Grid item xs={12}>
-            
+            <Paper elevation={4} className={classes.listWrapper}>
               <Grid 
                 container 
                 alignItems="center" 
                 justify="space-evenly" 
                 spacing={4} 
               >
-                  {movies.map(movie => {
-                      return (
-                          <Grid item key={movie.id} xs={2}>
-                              <Card elevation={3} className={classes.movieCard}>
-                                <CardHeader
-                                  title={movie.title}
-                                />
-                                <CardMedia
-                                  className={classes.media}
-                                  image={movie.poster} 
-                                  title={movie.title} 
-                                  onClick={() => handlePosterClick(movie.id)}
-                                />
-    
-                               </Card>
-                              
-                          </Grid>
-                      );
-                  })}
+                {movies.map(movie => {
+                    return (
+                        <Grid item key={movie.id} xs={2}>
+                            <Card className={classes.movieCard}>
+                              <CardHeader
+                                title={movie.title}
+                              />
+                              <CardMedia
+                                className={classes.media}
+                                image={movie.poster} 
+                                title={movie.title} 
+                                onClick={() => handlePosterClick(movie.id)}
+                              />
+  
+                              </Card>
+                            
+                        </Grid>
+                    );
+                })}
               </Grid>
-            
+            </Paper>
           </Grid>
 
         </Grid>
