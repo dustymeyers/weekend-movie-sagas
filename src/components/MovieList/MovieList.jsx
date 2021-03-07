@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
   }, 
   movieCard: {
     height: 350,
+    background: 'black',
+    color: 'white'
   },
   media: {
     height: 200,
@@ -34,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     margin: '2rem'
   },
   listWrapper: {
-    background:'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
     margin: '1rem',
     padding: '1.5rem'
   }

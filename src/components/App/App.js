@@ -13,6 +13,8 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    background: 'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
+    color: 'white'
   }, 
   appHeaderTitle: {
     paddingTop: '2rem',
