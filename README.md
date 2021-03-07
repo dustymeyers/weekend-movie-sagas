@@ -12,6 +12,21 @@ I added an additional feature to app to allow for movie details editing. In the 
 
 ## Screen Shot
 
+Home Screen to Details
+![Home Screen to Details](./screenshots/homeToDetails.gif)
+
+Details Screen to Edit Movie
+![Details Screen to Edit Movie](./screenshots/EditMovie.gif)
+
+Details Screen to Home
+![Details Screen to Home](./screenshots/detailsToHome.gif)
+
+Home Screen to Add Movie Form
+![Home Screen to Add Movie Form](./screenshots/homeToAddMovie.gif)
+
+Add Movie Success
+![Add Movie Success](./screenshots/AddMovie.gif)
+
 ### Prerequisites
 
 Link to software that is required to install the app (e.g. node).

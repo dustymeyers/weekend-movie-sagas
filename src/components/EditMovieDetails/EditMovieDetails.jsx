@@ -104,7 +104,7 @@ function EditMovieDetails() {
         })
         .then((willAdd) => {
           // if the user hits okay button, dispatch data to saga
-          if (willAdd) {j
+          if (willAdd) {
             // tell saga to update our movie with our current local state
             dispatch({
               type: 'UPDATE_MOVIE',
