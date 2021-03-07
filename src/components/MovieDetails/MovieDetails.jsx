@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 // Material-Ui
 import {
   Button,
+  ButtonGroup,
   Grid,
   Paper,
   Typography
@@ -37,7 +38,7 @@ function MovieDetails() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
-  const movieId = useParams();
+  const paramsObject = useParams();
   const movieDetails = useSelector(store => store.movieDetails);
   
   // movieDetails state object as variables
@@ -50,14 +51,20 @@ function MovieDetails() {
   useEffect(() => {
     dispatch({ 
       type: 'FETCH_MOVIE_DETAILS',
-      payload: movieId.id
+      payload: paramsObject.id
     });
-}, []);
+  }, []);
 
-  const handleClick = () => {
+  const handleBack = () => {
     console.log('clicked back button');
 
     history.push('/');
+  }
+
+  const handleEdit = () => {
+    console.log('clicked edit button');
+
+    history.push(`/edit/${paramsObject.id}`);
   }
 
   return(     
@@ -100,7 +107,10 @@ function MovieDetails() {
 
           {/* Back Button, sends home */}
           <Grid item>
-            <Button color="primary" variant="contained" onClick={handleClick}>Back to List</Button>
+            <ButtonGroup variant="contained">
+              <Button color="primary" onClick={handleBack}>Back to List</Button>
+              <Button onClick={handleEdit}>Edit</Button>
+            </ButtonGroup>
           </Grid>
         
       </Grid>
