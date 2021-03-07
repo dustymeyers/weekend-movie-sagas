@@ -70,18 +70,18 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <Grid container className={classes.root} spacing={2}> 
+        <Grid container direction="column" className={classes.root} spacing={2}> 
           
           <Grid item xs={12}>
-            <Grid justify="center" container>
+            <Grid justify="center" align="center" container>
 
               <Grid item xs={12}>
-                <Typography variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
+                <Typography align="center" variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
               </Grid>
 
-              <Grid item xs={3}>
+              <Grid item xs={3} >
                 <Button 
-                  className={classes.addMovieButton} 
+                  className={classes.addMovieButton}
                   size="large" 
                   variant="contained" 
                   onClick={handleAddMovie}

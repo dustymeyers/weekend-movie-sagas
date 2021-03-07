@@ -99,6 +99,7 @@ function AddMovie() {
 
   return(
     <Grid container justify="center">
+      
       {/* Page Title */}
       <Grid item xs={12}>
         <Typography className={classes.addMovieTitle} variant="h2">Add a Movie to the List!</Typography>
