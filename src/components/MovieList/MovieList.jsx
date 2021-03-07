@@ -30,14 +30,14 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%',
   },
   movieListTitle: {
-    marginTop: '2rem',
-    padding: '1rem',
+    // marginTop: '2rem',
+    // padding: '1rem',
   },
   addMovieButton: {
     margin: '2rem'
   },
   listWrapper: {
-    margin: '1rem',
+    margin: '0 2rem 0 2rem',
     padding: '1.5rem'
   }
 

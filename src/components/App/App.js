@@ -16,12 +16,14 @@ const useStyles = makeStyles((theme) => ({
     background: 'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
     color: 'white'
   }, 
+  appHeaderContainer:{
+    width: '100%'
+  },
   appHeaderTitle: {
     paddingTop: '2rem',
-    paddingBottom: '2rem',
+    paddingBottom: '1rem',
     background: 'black',
     color: 'white',
-    width: '100%'
   }
 }))
 
@@ -30,10 +32,10 @@ function App() {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root} justify="center" >
+    <Grid container className={classes.root} justify="center" align="center" spacing={10} >
 
-      <Grid item className={classes.appHeaderTitle}>
-        <Typography display="block" align="center" variant="h1" /*className={classes.appHeaderTitle}*/>
+      <Grid item className={classes.appHeaderContainer}>
+        <Typography className={classes.appHeaderTitle} align="center" variant="h1">
           The Movies Saga!
         </Typography>
       </Grid>

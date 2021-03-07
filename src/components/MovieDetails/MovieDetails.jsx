@@ -12,11 +12,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Material-Ui Styling
 const useStyles = makeStyles((theme) => ({
-  root: {
-
-  },
-  posterImage: {
-
+  movieDescriptionWrapper: {
+    width: '60%'
   }
 }));
 
@@ -43,46 +40,44 @@ function MovieDetails() {
     history.push('/');
   }
 
-  return(
-    <Grid item>    
-      <Paper elevation={5}>
-        <Grid container justify="center" align="center" spacing={5}> 
-            
-            <Grid item xs={12}>      
-              <Typography variant="h2">{movieTitle}</Typography>
-            </Grid>
-
-            <Grid item xs={4} >
-              <Paper elevation={2}>
-                <img src={moviePosterImage} alt={altImgText} />
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Typography variant="h4">
-                Genres:
-                {movieGenresArray ?
-                  movieGenresArray.map((genre, index) => {
-                    // serializes commas, checking if the genre is the last item in the array 
-                    return movieGenresArray.length - index === 1 ? 
-                      <span key={index}> {genre}</span> :
-                      <span key={index}> {genre}, </span>;
-                  }) :
-                  <span>No Genres Listed</span>}
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Typography variant="body1">{movieDescription}</Typography>
-            </Grid>
-
-            <Grid item>
-              <Button color="primary" variant="contained" onClick={handleClick}>Back to List</Button>
-            </Grid>
+  return(     
+    <Paper elevation={5} className={classes.movieDescriptionWrapper}>
+      <Grid container justify="center" align="center" spacing={5}> 
           
-        </Grid>
-      </Paper>  
-    </Grid>
+          <Grid item xs={12}>      
+            <Typography variant="h2">{movieTitle}</Typography>
+          </Grid>
+
+          <Grid item xs={4} >
+            <Paper elevation={2}>
+              <img src={moviePosterImage} alt={altImgText} />
+            </Paper>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Typography variant="h4">
+              Genres:
+              {movieGenresArray ?
+                movieGenresArray.map((genre, index) => {
+                  // serializes commas, checking if the genre is the last item in the array 
+                  return movieGenresArray.length - index === 1 ? 
+                    <span key={index}> {genre}</span> :
+                    <span key={index}> {genre}, </span>;
+                }) :
+                <span>No Genres Listed</span>}
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Typography variant="body1">{movieDescription}</Typography>
+          </Grid>
+
+          <Grid item>
+            <Button color="primary" variant="contained" onClick={handleClick}>Back to List</Button>
+          </Grid>
+        
+      </Grid>
+    </Paper>  
   );
 } // end MovieDetails
 

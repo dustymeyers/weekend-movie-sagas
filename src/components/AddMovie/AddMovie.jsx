@@ -21,10 +21,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 // Material-UI styling
 const useStyles = makeStyles((theme) => ({
-  addMovieTitle: {
-    marginTop: '2rem',
-    padding: '1rem',
-  },
   addMovieForm: {
     marginTop: '2rem',
     padding: '1rem'
@@ -105,7 +101,7 @@ function AddMovie() {
 
       {/* Page Title */}
       <Grid item xs={12}>
-        <Typography className={classes.addMovieTitle} variant="h2">Add a Movie to the List!</Typography>
+        <Typography variant="h2">Add a Movie to the List!</Typography>
       </Grid>
 
       {/* Rendered Form Item w/ Buttons */}
