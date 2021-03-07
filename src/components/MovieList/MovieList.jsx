@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   listWrapper: {
     background:'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
     margin: '1rem',
-    padding: '.75rem'
+    padding: '1.5rem'
   }
 
 }));
