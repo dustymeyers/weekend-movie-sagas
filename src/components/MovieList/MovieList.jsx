@@ -5,6 +5,7 @@ import './MovieList.css'
 
 // Material-Ui
 import { 
+  Card,
   Grid, 
   Button, 
   Paper, 
@@ -69,11 +70,16 @@ function MovieList() {
                   {movies.map(movie => {
                       return (
                           <Grid item key={movie.id} xs={2}>
-                              <Paper elevation={3}>
+                              <Card elevation={3}>
                                 <h3>{movie.title}</h3>
-                                <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
+                                <img 
+                                  className="home-poster-img"
+                                  src={movie.poster} 
+                                  alt={movie.title} 
+                                  onClick={() => handlePosterClick(movie.id)}
+                                />
     
-                               </Paper>
+                               </Card>
                               
                           </Grid>
                       );
