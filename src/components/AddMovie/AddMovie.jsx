@@ -49,6 +49,7 @@ function AddMovie() {
     description: ''
   });
   
+  // On page load, fetch genres from DB
   useEffect(() => {
     dispatch({ type: 'FETCH_GENRES' });
   }, []);
@@ -57,44 +58,45 @@ function AddMovie() {
     history.push('/');
   } // end handleCancelButton
 
+  // Handles Submission Event
   const saveMovie = (event) => {
     event.preventDefault();
+    // check for any blank inputs
     if (
       newMovie.title === '' || 
       newMovie.poster === '' || 
       newMovie.genre_id === '' || 
       newMovie.description === ''
-    ) {
+    ) { // if any are blank, sweetAlert will cancel the submission
       return swal({
         title: 'Seems you forgot something.',
         text: 'Please fill out each input before submission.'
       });
     } else {
-    swal({
-      title: "Ready to Add?",
-      text: "Do you want to look at your submission once more before completion?",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willAdd) => {
-      if (willAdd) {
-        dispatch({
-          type: 'ADD_MOVIE',
-          payload: newMovie
-        });
+      // to prevent early submission, sweetAlert asks:
+      swal({
+        title: "Ready to Add?",
+        text: "Do you want to look at your submission once more before completion?",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willAdd) => {
+        if (willAdd) {
+          dispatch({
+            type: 'ADD_MOVIE',
+            payload: newMovie
+          });
 
-        swal({
-          title: "Your movie has been added!",
-          icon: "success",
-        });
-        
-        history.push('/');
-      } else {
-        swal("Add a movie when you're ready.");
-      }
-    });
-    
-    
+          swal({
+            title: "Your movie has been added!",
+            icon: "success",
+          });
+          
+          history.push('/');
+        } else {
+          swal("Add a movie when you're ready.");
+        }
+      });
     }
   } // end saveMovie
 
@@ -167,11 +169,12 @@ function AddMovie() {
                           displayEmpty
                           required
                         >
-
+                          {/* This will be the first item displayed, validation does not allow it to be submitted */}
                           <MenuItem value="">
                             <em>Choose a Genre</em>
                           </MenuItem>
 
+                          {/* Renders our drop down from DB */}
                           {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
 
                         </Select>
@@ -179,6 +182,7 @@ function AddMovie() {
                       </FormControl>
                     </Grid>
 
+                    {/* Description Input */}
                     <Grid item xs={12}>  
                       <FormControl fullWidth color="secondary">
                         <TextField
@@ -201,9 +205,11 @@ function AddMovie() {
                 </form>       
             </Grid>
 
+            {/* Contains Cancel and Save Button */}
             <Grid item xs={12}>
               <ButtonGroup size="large" variant="contained">
 
+                {/* Cancel Button */}
                 <Button 
                   color="secondary" 
                   form="add-movie-form" 
@@ -211,7 +217,8 @@ function AddMovie() {
                 >
                   Cancel
                 </Button>
-
+                
+                {/* Save Button */}
                 <Button color="primary" onClick={saveMovie}>Save</Button>
 
               </ButtonGroup>
