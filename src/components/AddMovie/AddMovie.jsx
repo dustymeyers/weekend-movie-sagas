@@ -90,6 +90,7 @@ function AddMovie() {
       .then((willAdd) => {
         // if the user hits okay button, dispatch data to saga
         if (willAdd) {
+          // tell saga to add a movie with our current local state
           dispatch({
             type: 'ADD_MOVIE',
             payload: newMovie
@@ -98,15 +99,16 @@ function AddMovie() {
           swal({
             title: "Your movie has been added!",
             icon: "success",
-          })
-          .then(() => history.push('/'))
-          .catch(() => {
-            swal({
-              title: "It looks like something went wrong.",
-              text: "Please wait a few minutes and try again.",
-              icon: "warning"
-            })
-          });
+          }) 
+          // on success send the user home
+            .then(() => history.push('/'))
+            .catch(() => {
+              swal({
+                title: "It looks like something went wrong.",
+                text: "Please wait a few minutes and try again.",
+                icon: "warning"
+              })
+            });
         } else { 
           swal("Add a movie when you're ready.");
         }

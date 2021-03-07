@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/**
+ * EditMovieDetails Renders an Edit Form for Selected Movie
+ * 
+ * Rehashed form components from AddMovie, modifications update inputs to hold
+ * current movie detail values. Implementation of Sweet Alert for user verification.
+ * Validates submission data same as previous form. 
+ */
+
 function EditMovieDetails() {
   const classes = useStyles();
   const history = useHistory();
@@ -53,6 +61,7 @@ function EditMovieDetails() {
     dispatch({ type: 'FETCH_GENRES' });
   }, [])
 
+  // in the case of slow render, set's inputs to an empty string, will update on redux change
   if (movieDetails.title) {
     movieDetailsReduxState = movieDetails;
   } else {
@@ -95,7 +104,8 @@ function EditMovieDetails() {
         })
         .then((willAdd) => {
           // if the user hits okay button, dispatch data to saga
-          if (willAdd) {
+          if (willAdd) {j
+            // tell saga to update our movie with our current local state
             dispatch({
               type: 'UPDATE_MOVIE',
               payload: movieEdit
@@ -104,7 +114,7 @@ function EditMovieDetails() {
             swal({
               title: "Your movie has been updated!",
               icon: "success",
-            })
+            }) // on success send the user back to movie details page.
               .then(() => history.push(`/description/${paramsObject.id}`))
               .catch(() => {
                 swal({
