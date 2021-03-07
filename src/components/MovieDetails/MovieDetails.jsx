@@ -5,6 +5,7 @@ import { useHistory, useParams } from 'react-router-dom';
 // Material-Ui
 import {
   Button,
+  ButtonGroup,
   Grid,
   Paper,
   Typography
@@ -54,10 +55,14 @@ function MovieDetails() {
     });
 }, []);
 
-  const handleClick = () => {
+  const handleBack = () => {
     console.log('clicked back button');
 
     history.push('/');
+  }
+
+  const handleEdit = () => {
+    console.log('clicked edit button');
   }
 
   return(     
@@ -100,7 +105,10 @@ function MovieDetails() {
 
           {/* Back Button, sends home */}
           <Grid item>
-            <Button color="primary" variant="contained" onClick={handleClick}>Back to List</Button>
+            <ButtonGroup variant="contained">
+              <Button color="primary" onClick={handleBack}>Back to List</Button>
+              <Button onClick={handleEdit}>Edit</Button>
+            </ButtonGroup>
           </Grid>
         
       </Grid>
