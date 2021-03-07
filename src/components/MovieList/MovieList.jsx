@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+// Material-Ui Styles
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -115,23 +116,27 @@ function MovieList() {
                 {/* Movie Cards Created with Movie Image, Title, and Id */}
                 {movies.map(movie => {
                     return (
-                        <Grid item key={movie.id} xs={2}>
-                            <Card className={classes.movieCard}>
+                        <Grid 
+                          item 
+                          key={movie.id} 
+                          xs={2} 
+                          onClick={() => handlePosterClick(movie.id)}
+                        >
+                          <Card className={classes.movieCard}>
 
-                              {/* Movie Title */}
-                              <CardHeader
-                                title={movie.title}
-                              />
+                            {/* Movie Title */}
+                            <CardHeader
+                              title={movie.title}
+                            />
 
-                              {/* Movie Poster Image */}
-                              <CardMedia
-                                className={classes.media}
-                                image={movie.poster} 
-                                title={movie.title} 
-                                onClick={() => handlePosterClick(movie.id)}
-                              />
-                            
-                            </Card>                            
+                            {/* Movie Poster Image */}
+                            <CardMedia
+                              className={classes.media}
+                              image={movie.poster} 
+                              title={movie.title}                                
+                            />
+                          
+                          </Card>                            
                         </Grid>
                     );
                 })}

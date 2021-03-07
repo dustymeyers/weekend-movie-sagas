@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     padding: '1rem'
   },
   addMoviePaper: {
-    padding: '1.5rem'
+    padding: '1.5rem',
+    margin: '1rem'
   }
 }));
 
@@ -98,21 +99,24 @@ function AddMovie() {
   } // end saveMovie
 
   return(
-    <Grid container justify="center">
-      
+    <Grid container align="center" justify="center">
+
       {/* Page Title */}
       <Grid item xs={12}>
         <Typography className={classes.addMovieTitle} variant="h2">Add a Movie to the List!</Typography>
       </Grid>
 
+      {/* Rendered Form Item w/ Buttons */}
       <Grid item>
         <Paper elevation={5} className={classes.addMoviePaper}>
           <Grid container>
             
+            {/* Form */}
             <Grid item xs={12}>
                 <form className={classes.addMovieForm} id="add-movie-form">
                   <Grid container spacing={2}>
 
+                    {/* Movie Title Input */}
                     <Grid item xs={4}>
                       <FormControl fullWidth>
                         <TextField
@@ -130,6 +134,7 @@ function AddMovie() {
                       </FormControl>
                     </Grid>
 
+                    {/* Movie Poster Input */}
                     <Grid item xs={4}>
                       <FormControl fullWidth> 
                         <TextField
@@ -147,14 +152,15 @@ function AddMovie() {
                       </FormControl>
                     </Grid> 
 
+                    {/* Movie Genre Selector */}
                     <Grid item xs={4}>
                       <FormControl fullWidth margin="normal">
+                        {/* Material-UI doesn't accept label as attribute for Select */}
                         <InputLabel margin="normal" shrink id="genre-input-selector">
                           Genre:
                         </InputLabel>
 
-                        <Select
-                          
+                        <Select                          
                           labelId="genre-input-selector"
                           value={newMovie.genre_id} 
                           onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
@@ -196,7 +202,7 @@ function AddMovie() {
             </Grid>
 
             <Grid item xs={12}>
-              <ButtonGroup variant="contained">
+              <ButtonGroup size="large" variant="contained">
 
                 <Button 
                   color="secondary" 

@@ -44,11 +44,9 @@ function MovieDetails() {
   }
 
   return(
-    <Grid item>
-
-    
+    <Grid item>    
       <Paper elevation={5}>
-        <Grid container justify="center" spacing={5}> 
+        <Grid container justify="center" align="center" spacing={5}> 
             
             <Grid item xs={12}>      
               <Typography variant="h2">{movieTitle}</Typography>
@@ -83,8 +81,7 @@ function MovieDetails() {
             </Grid>
           
         </Grid>
-      </Paper>
-  
+      </Paper>  
     </Grid>
   );
 } // end MovieDetails
