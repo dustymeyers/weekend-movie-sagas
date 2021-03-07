@@ -3,8 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
-function MovieList() {
+// Material-Ui
+import { 
+  Grid, 
+  Button, 
+  Paper, 
+  GridList,
+  GridListTile,
+  GridListTileBar 
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  }
+}));
+
+function MovieList() {
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
@@ -12,6 +29,10 @@ function MovieList() {
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES' });
     }, []);
+
+    const handleAddMovie = () => {
+      history.push('/addMovie')
+    } // end handleAddMovie
 
     const handlePosterClick = (movieId) => {
       console.log('poster clicked', movieId);
@@ -28,19 +49,41 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <main>
-            <h1>MovieList</h1>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
-                        </div>
-                    );
-                })}
-            </section>
-        </main>
+        <Grid container className={classes.root} spacing={2}> 
+
+          <Grid item xs={12}>
+            <Grid justify="center" container>
+              <Grid item xs={12}>
+                <h1>MovieList</h1>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Button color="primary" onClick={handleAddMovie}>Add a Movie</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            
+              <GridList cellHeight="auto" cols={4}>
+                  {movies.map(movie => {
+                      return (
+                          <GridListTile key={movie.id} >
+                              <h3>{movie.title}</h3>
+                              <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
+                              {/* <GridListTileBar
+                                title={movie.title}
+                              /> */}
+
+                              
+                          </GridListTile>
+                      );
+                  })}
+              </GridList>
+            
+          </Grid>
+
+        </Grid>
 
     );
 }
