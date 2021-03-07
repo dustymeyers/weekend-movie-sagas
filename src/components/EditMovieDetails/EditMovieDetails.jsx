@@ -45,12 +45,12 @@ function EditMovieDetails() {
   let movieDetailsReduxState;
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_GENRES' });
-
     dispatch({ 
       type: 'FETCH_MOVIE_DETAILS',
       payload: paramsObject.id
     });
+
+    dispatch({ type: 'FETCH_GENRES' });
   }, [])
 
   if (movieDetails.title) {
@@ -60,19 +60,59 @@ function EditMovieDetails() {
       title: '',
       poster: '',
       genre_id: '',
-      description: ''
+      description: '',
+      id: '' // refers to movie.id from DB
     };
   }
 
-  const [newMovie, setNewMovie] = useState(movieDetailsReduxState);
+  const [movieEdit, setMovieEdit] = useState(movieDetailsReduxState);
 
   const handleCancelButton = () => {
     history.push(`/description/${paramsObject.id}`);
   } // end handleCancelButton
 
-  const saveMovie = () => {
-
-  } // end saveMovie
+    // Handles Submission Event
+    const saveMovie = (event) => {
+      event.preventDefault();
+      // check for any blank inputs
+      if (
+        movieEdit.title === '' || 
+        movieEdit.poster === '' || 
+        movieEdit.genre_id === '' || 
+        movieEdit.description === ''
+      ) { // if any are blank, sweetAlert will cancel the submission
+        return swal({
+          title: 'Seems you forgot something.',
+          text: 'Please fill out each input before submission.'
+        });
+      } else {
+        // to prevent early submission, sweetAlert asks:
+        swal({
+          title: "Ready to Save?",
+          text: "Do you want to look at your submission once more before completion?",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willAdd) => {
+          // if the user hits okay button, dispatch data to saga
+          if (willAdd) {
+            dispatch({
+              type: 'UPDATE_MOVIE',
+              payload: movieEdit
+            });
+  
+            swal({
+              title: "Your movie has been updated!",
+              icon: "success",
+            });
+            
+            history.push('/');
+          } else { 
+            swal("Save the movie when you're ready.");
+          }
+        });
+      }
+    } // end saveMovie
 
   return(
     <Grid container align="center" justify="center">
@@ -101,8 +141,8 @@ function EditMovieDetails() {
                         margin="normal"
                         label="Title:" 
                         variant="outlined"
-                        value={newMovie.title} 
-                        onChange={event => setNewMovie({...newMovie, title: event.target.value})}
+                        value={movieEdit.title} 
+                        onChange={event => setMovieEdit({...movieEdit, title: event.target.value})}
                         type="text" 
                         placeholder="Title of Movie" 
                         required
@@ -119,8 +159,8 @@ function EditMovieDetails() {
                         label="Poster:"
                         margin="normal"
                         variant="outlined"
-                        value={newMovie.poster}
-                        onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
+                        value={movieEdit.poster}
+                        onChange={event => setMovieEdit({...movieEdit, poster: event.target.value})}
                         type="url" 
                         placeholder="Image Address" 
                         required
@@ -138,8 +178,8 @@ function EditMovieDetails() {
 
                       <Select                          
                         labelId="genre-input-selector"
-                        value={newMovie.genre_id} 
-                        onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
+                        value={movieEdit.genre_id} 
+                        onChange={event => setMovieEdit({...movieEdit, genre_id: event.target.value})}
                         displayEmpty
                         required
                       >
@@ -164,8 +204,8 @@ function EditMovieDetails() {
                         id="description-input"
                         margin="normal"     
                         label="Description:"
-                        value={newMovie.description}
-                        onChange={event => setNewMovie({...newMovie, description: event.target.value})}
+                        value={movieEdit.description}
+                        onChange={event => setMovieEdit({...movieEdit, description: event.target.value})}
                         placeholder="Movie Description" 
                         multiline
                         rows={4}

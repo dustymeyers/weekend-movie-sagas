@@ -20,6 +20,8 @@ function* rootSaga() {
     yield takeEvery('FETCH_GENRES', fetchGenres);
 
     yield takeEvery('ADD_MOVIE', addMovie);
+
+    yield takeEvery('UPDATE_MOVIE', updateMovie);
 }
 
 function* addMovie(action) {
@@ -75,6 +77,17 @@ function* fetchMovieDetails(action) {
     console.log('Error getting movie details', err);
   }
 } // end fetchMovieDetails
+
+function* updateMovie(action) {
+  // PUT updated values into the DB
+  try {
+    yield axios.put('/api/details/', action.payload);
+
+
+  } catch (err) {
+    console.log('Error updating movie details', err);
+  }
+}
 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
