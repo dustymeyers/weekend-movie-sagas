@@ -1,5 +1,6 @@
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 
 // Material-Ui
 import {
@@ -27,15 +28,24 @@ const useStyles = makeStyles((theme) => ({
 
 function MovieDetails() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const history = useHistory();
+  const movieId = useParams();
   const movieDetails = useSelector(store => store.movieDetails);
-  
+  console.log('params:', movieId);
   // movieDetails state object as variables
   const movieTitle = movieDetails.title;
   const moviePosterImage = movieDetails.poster;
   const altImgText = `Poster for the movie ${movieTitle}`;
   const movieGenresArray = movieDetails.genres;
   const movieDescription = movieDetails.description;
+
+  useEffect(() => {
+    dispatch({ 
+      type: 'FETCH_MOVIE_DETAILS',
+      payload: movieId.id
+    });
+}, []);
 
   const handleClick = () => {
     console.log('clicked back button');

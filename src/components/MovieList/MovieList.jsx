@@ -67,7 +67,7 @@ function MovieList() {
         payload: movieId
       });
 
-      history.push('/details');
+      history.push(`/description/${movieId}`);
     } // end handlePosterClick
 
     return (
