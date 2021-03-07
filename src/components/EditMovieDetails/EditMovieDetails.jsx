@@ -53,7 +53,7 @@ function EditMovieDetails() {
     });
   }, [])
 
-  if (movieDetails) {
+  if (movieDetails.title) {
     movieDetailsReduxState = movieDetails;
   } else {
     movieDetailsReduxState = {
@@ -67,7 +67,7 @@ function EditMovieDetails() {
   const [newMovie, setNewMovie] = useState(movieDetailsReduxState);
 
   const handleCancelButton = () => {
-    
+    history.push(`/description/${paramsObject.id}`);
   } // end handleCancelButton
 
   const saveMovie = () => {
