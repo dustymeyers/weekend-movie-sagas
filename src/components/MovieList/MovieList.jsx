@@ -10,7 +10,7 @@ import {
   Paper, 
   GridList,
   GridListTile,
-  GridListTileBar 
+  GridListTileBar
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -65,21 +65,20 @@ function MovieList() {
 
           <Grid item xs={12}>
             
-              <GridList cellHeight="auto" cols={4}>
+              <Grid container alignItems="center" justify="space-evenly" spacing={4} >
                   {movies.map(movie => {
                       return (
-                          <GridListTile key={movie.id} >
-                              <h3>{movie.title}</h3>
-                              <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
-                              {/* <GridListTileBar
-                                title={movie.title}
-                              /> */}
-
+                          <Grid item key={movie.id} xs={2}>
+                              <Paper elevation={3}>
+                                <h3>{movie.title}</h3>
+                                <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
+    
+                               </Paper>
                               
-                          </GridListTile>
+                          </Grid>
                       );
                   })}
-              </GridList>
+              </Grid>
             
           </Grid>
 
