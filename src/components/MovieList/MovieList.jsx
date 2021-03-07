@@ -6,23 +6,34 @@ import './MovieList.css'
 // Material-Ui
 import { 
   Card,
+  CardHeader,
+  CardMedia,
   Grid, 
   Button, 
   Paper, 
   GridList,
   GridListTile,
-  GridListTileBar
+  GridListTileBar,
+  Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    background:'linear-gradient(45deg, #564d4d 30%, #831010 90%)'
   }, 
   movieCard: {
-    height: 300,
-    padding: 10
+    height: 350,
+  },
+  media: {
+    height: 200,
+    paddingTop: '56.25%',
+  },
+  movieListTitle: {
+    color: '#FFFFFF'
   }
+
 }));
 
 function MovieList() {
@@ -59,27 +70,41 @@ function MovieList() {
           <Grid item xs={12}>
             <Grid justify="center" container>
               <Grid item xs={12}>
-                <h1>MovieList</h1>
+                <Typography variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
               </Grid>
 
               <Grid item xs={3}>
-                <Button color="primary" onClick={handleAddMovie}>Add a Movie</Button>
+                <Button 
+                  className={classes.addMovieButton} 
+                  size="large" 
+                  variant="contained" 
+                  onClick={handleAddMovie}
+                >
+                  Add a Movie
+                </Button>
               </Grid>
             </Grid>
           </Grid>
 
           <Grid item xs={12}>
             
-              <Grid container alignItems="center" justify="space-evenly" spacing={4} >
+              <Grid 
+                container 
+                alignItems="center" 
+                justify="space-evenly" 
+                spacing={4} 
+              >
                   {movies.map(movie => {
                       return (
                           <Grid item key={movie.id} xs={2}>
                               <Card elevation={3} className={classes.movieCard}>
-                                <h3>{movie.title}</h3>
-                                <img 
-                                  className="home-poster-img"
-                                  src={movie.poster} 
-                                  alt={movie.title} 
+                                <CardHeader
+                                  title={movie.title}
+                                />
+                                <CardMedia
+                                  className={classes.media}
+                                  image={movie.poster} 
+                                  title={movie.title} 
                                   onClick={() => handlePosterClick(movie.id)}
                                 />
     

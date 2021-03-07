@@ -6,13 +6,14 @@ import AddMovie from '../AddMovie/AddMovie';
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieList from '../MovieList/MovieList';
 
-
+// Material-UI
+import { Typography } from '@material-ui/core';
 
 
 function App() {
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
+      <Typography variant="h1">The Movies Saga!</Typography>
       <Router>        
         <Route path="/" exact>
           <MovieList />
