@@ -5,19 +5,41 @@ import './MovieList.css'
 
 // Material-Ui
 import { 
-  Grid, 
   Button, 
-  Paper, 
-  GridList,
-  GridListTile,
-  GridListTileBar 
+  Card,
+  CardHeader,
+  CardMedia,
+  Grid, 
+  Paper,
+  Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
+// Material-Ui Styles
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+  }, 
+  movieCard: {
+    height: 350,
+    background: 'black',
+    color: 'white'
+  },
+  media: {
+    height: 200,
+    paddingTop: '56.25%',
+  },
+  movieListTitle: {
+    marginTop: '2rem',
+  },
+  addMovieButton: {
+    margin: '2rem'
+  },
+  listWrapper: {
+    margin: '0 2rem 2rem 2rem',
+    padding: '1.5rem'
   }
+
 }));
 
 function MovieList() {
@@ -49,42 +71,81 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <Grid container className={classes.root} spacing={2}> 
-
+        <Grid 
+          container 
+          direction="column" 
+          className={classes.root} 
+          spacing={2}
+        > 
+          
+          {/* Page specific header (separate from App header) includes title and add movie button */}
           <Grid item xs={12}>
-            <Grid justify="center" container>
+            <Grid justify="center" align="center" container>
+
+              {/* Title */}
               <Grid item xs={12}>
-                <h1>MovieList</h1>
+                <Typography align="center" variant="h2" className={classes.movieListTitle}>
+                  Your Movie List
+                </Typography>
               </Grid>
 
-              <Grid item xs={3}>
-                <Button color="primary" onClick={handleAddMovie}>Add a Movie</Button>
+              {/* Add Movie Button, routes to /addMovie on click */}
+              <Grid item xs={3} >
+                <Button 
+                  className={classes.addMovieButton}
+                  size="large" 
+                  variant="contained" 
+                  onClick={handleAddMovie}
+                >
+                  Add a Movie
+                </Button>
               </Grid>
+
             </Grid>
           </Grid>
 
+          {/* Rendered List of Movie Posters */}
           <Grid item xs={12}>
-            
-              <GridList cellHeight="auto" cols={4}>
-                  {movies.map(movie => {
-                      return (
-                          <GridListTile key={movie.id} >
-                              <h3>{movie.title}</h3>
-                              <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
-                              {/* <GridListTileBar
-                                title={movie.title}
-                              /> */}
+            <Paper elevation={5} className={classes.listWrapper}>
+              <Grid 
+                container 
+                alignItems="center" 
+                justify="space-evenly" 
+                spacing={4} 
+              >
 
-                              
-                          </GridListTile>
-                      );
-                  })}
-              </GridList>
-            
+                {/* Movie Cards Created with Movie Image, Title, and Id */}
+                {movies.map(movie => {
+                    return (
+                        <Grid 
+                          item 
+                          key={movie.id} 
+                          xs={3} 
+                          onClick={() => handlePosterClick(movie.id)}
+                        >
+                          <Card className={classes.movieCard}>
+
+                            {/* Movie Title */}
+                            <CardHeader
+                              title={movie.title}
+                            />
+
+                            {/* Movie Poster Image */}
+                            <CardMedia
+                              className={classes.media}
+                              image={movie.poster} 
+                              title={movie.title}                                
+                            />
+                          
+                          </Card>                            
+                        </Grid>
+                    );
+                })}
+
+              </Grid>
+            </Paper>
           </Grid>
-
         </Grid>
-
     );
 }
 

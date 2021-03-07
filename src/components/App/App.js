@@ -6,31 +6,60 @@ import AddMovie from '../AddMovie/AddMovie';
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieList from '../MovieList/MovieList';
 
+// Material-UI
+import { Typography, Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    background: 'linear-gradient(45deg, #564d4d 30%, #831010 90%)',
+    color: 'white'
+  }, 
+  appHeaderContainer:{
+    width: '100%'
+  },
+  appHeaderTitle: {
+    paddingTop: '2rem',
+    paddingBottom: '2rem',
+    background: 'black',
+    color: 'white',
+  }
+}))
 
 
 function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <h1>The Movies Saga!</h1>
-      <Router>        
-        <Route path="/" exact>
-          <MovieList />
-        </Route>
-        
-        {/* Details page */}
-        <Route path="/details">
-          <MovieDetails />
-        </Route>
+    <Grid container className={classes.root} justify="center" align="center">
 
-        {/* Add Movie page */}
-        <Route path="/addMovie">
-          <AddMovie />
-        </Route>
+      <Grid item className={classes.appHeaderContainer}>
+        <Typography className={classes.appHeaderTitle} align="center" variant="h1">
+          The Movies Saga!
+        </Typography>
+      </Grid>
 
-        {/* TODO Add an Edit page */}
-      </Router>
-    </div>
+      <Grid item>        
+        <Router>        
+          <Route path="/" exact>
+            <MovieList />
+          </Route>
+          
+          {/* Details page */}
+          <Route path="/details">
+            <MovieDetails />
+          </Route>
+
+          {/* Add Movie page */}
+          <Route path="/addMovie">
+            <AddMovie />
+          </Route>
+
+          {/* TODO Add an Edit page */}
+        </Router>
+      </Grid>
+    </Grid>
   );
 }
 
