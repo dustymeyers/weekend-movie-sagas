@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import {
   ButtonGroup,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -17,7 +18,14 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-
+  addMovieTitle: {
+    marginTop: '2rem',
+    padding: '1rem',
+  },
+  addMovieForm: {
+    marginTop: '2rem',
+  },
+  
 }));
 
 function AddMovie() {
@@ -87,73 +95,91 @@ function AddMovie() {
   return(
     <Grid container justify="center">
       <Grid item xs={12}>
-        <Typography variant="h2">Add a Movie to the List!</Typography>
+        <Typography className={classes.addMovieTitle} variant="h2">Add a Movie to the List!</Typography>
       </Grid>
       <Grid item xs={12}> 
         
-          <FormControl id="add-movie-form">
-            <Grid container>
-              
+          <form /*className={classes.addMovieForm}*/ id="add-movie-form">
+            <Grid container spacing={2}>
               <Grid item xs={4}>
-                <TextField
-                  label="Title:" 
-                  variant="outlined"
-                  value={newMovie.title} 
-                  onChange={event => setNewMovie({...newMovie, title: event.target.value})}
-                  type="text" 
-                  placeholder="Title of Movie" 
-                  required
-                />
+                <FormControl fullWidth>
+                  <TextField
+                    helperText="Input a title for the movie"
+                    id="title-input"
+                    margin="normal"
+                    label="Title:" 
+                    variant="outlined"
+                    value={newMovie.title} 
+                    onChange={event => setNewMovie({...newMovie, title: event.target.value})}
+                    type="text" 
+                    placeholder="Title of Movie" 
+                    required
+                  />
+                </FormControl>
               </Grid>
 
               <Grid item xs={4}>
-                <TextField
-                  label="Poster:"
-                  variant="outlined"
-                  value={newMovie.poster}
-                  onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
-                  type="url" 
-                  placeholder="Image Address" 
-                  required
-                />
-              </Grid>           
-            
+                <FormControl fullWidth> 
+                  <TextField
+                    helperText="Input an image address for the movie poster."
+                    id="poster-input"
+                    label="Poster:"
+                    margin="normal"
+                    variant="outlined"
+                    value={newMovie.poster}
+                    onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
+                    type="url" 
+                    placeholder="Image Address" 
+                    required
+                  />
+                </FormControl>
+              </Grid> 
+
               <Grid item xs={4}>
-                <InputLabel shrink id="genre-input-selector">
-                  Genre:
-                </InputLabel>
+                <FormControl fullWidth margin="normal">
+                  <InputLabel margin="normal" shrink id="genre-input-selector">
+                    Genre:
+                  </InputLabel>
 
-                <Select
-                  labelId="genre-input-selector"
-                  value={newMovie.genre_id} 
-                  onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
-                  displayEmpty
-                  required
-                >
+                  <Select
+                    
+                    labelId="genre-input-selector"
+                    value={newMovie.genre_id} 
+                    onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
+                    displayEmpty
+                    required
+                  >
 
-                  <MenuItem value="">
-                    <em>Choose a Genre</em>
-                  </MenuItem>
+                    <MenuItem value="">
+                      <em>Choose a Genre</em>
+                    </MenuItem>
 
-                  {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
+                    {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
 
-                </Select>
+                  </Select>
+                  <FormHelperText>Choose a genre for the movie.</FormHelperText>
+                </FormControl>
               </Grid>
-        
+
               <Grid item xs={12}>  
-                <TextField
-                  label="Description:"
-                  value={newMovie.description}
-                  onChange={event => setNewMovie({...newMovie, description: event.target.value})}
-                  placeholder="Movie Description" 
-                  multiline
-                  rows={4}
-                  required
-                  variant="outlined"
-                />
+                <FormControl fullWidth color="secondary">
+                  <TextField
+                    helperText="Input a brief movie synopsys."
+                    id="description-input"
+                    margin="normal"     
+                    label="Description:"
+                    value={newMovie.description}
+                    onChange={event => setNewMovie({...newMovie, description: event.target.value})}
+                    placeholder="Movie Description" 
+                    multiline
+                    rows={4}
+                    required
+                    variant="outlined"
+                  />
+                </FormControl>
               </Grid>
             </Grid>
-          </FormControl>
+          </form>
         
       </Grid>
       <button form="add-movie-form" onClick={handleCancelButton}>Cancel</button>
