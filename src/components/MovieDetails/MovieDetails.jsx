@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 // Material-Ui Styling
 const useStyles = makeStyles((theme) => ({
   movieDescriptionWrapper: {
+    padding: '2rem',
     width: '60%'
   }
 }));
@@ -48,9 +49,9 @@ function MovieDetails() {
             <Typography variant="h2">{movieTitle}</Typography>
           </Grid>
 
-          <Grid item xs={4} >
+          <Grid item xs={5} >
             <Paper elevation={2}>
-              <img src={moviePosterImage} alt={altImgText} />
+              <img className="movie-description-image" src={moviePosterImage} alt={altImgText} />
             </Paper>
           </Grid>
 
@@ -69,7 +70,7 @@ function MovieDetails() {
           </Grid>
 
           <Grid item>
-            <Typography variant="body1">{movieDescription}</Typography>
+            <Typography align="justify" paragraph variant="body1">{movieDescription}</Typography>
           </Grid>
 
           <Grid item>
