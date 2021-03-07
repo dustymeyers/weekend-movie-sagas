@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appHeaderTitle: {
     paddingTop: '2rem',
-    paddingBottom: '1rem',
+    paddingBottom: '2rem',
     background: 'black',
     color: 'white',
   }
@@ -32,7 +32,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <Grid container className={classes.root} justify="center" align="center" spacing={10} >
+    <Grid container className={classes.root} justify="center" align="center">
 
       <Grid item className={classes.appHeaderContainer}>
         <Typography className={classes.appHeaderTitle} align="center" variant="h1">

@@ -30,14 +30,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%',
   },
   movieListTitle: {
-    // marginTop: '2rem',
-    // padding: '1rem',
+    marginTop: '2rem',
   },
   addMovieButton: {
     margin: '2rem'
   },
   listWrapper: {
-    margin: '0 2rem 0 2rem',
+    margin: '0 2rem 2rem 2rem',
     padding: '1.5rem'
   }
 
@@ -79,13 +78,15 @@ function MovieList() {
           spacing={2}
         > 
           
-          {/* Page specific header (sepperate from App header) */}
+          {/* Page specific header (separate from App header) includes title and add movie button */}
           <Grid item xs={12}>
             <Grid justify="center" align="center" container>
 
               {/* Title */}
               <Grid item xs={12}>
-                <Typography align="center" variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
+                <Typography align="center" variant="h2" className={classes.movieListTitle}>
+                  Your Movie List
+                </Typography>
               </Grid>
 
               {/* Add Movie Button, routes to /addMovie on click */}
@@ -119,7 +120,7 @@ function MovieList() {
                         <Grid 
                           item 
                           key={movie.id} 
-                          xs={2} 
+                          xs={3} 
                           onClick={() => handlePosterClick(movie.id)}
                         >
                           <Card className={classes.movieCard}>

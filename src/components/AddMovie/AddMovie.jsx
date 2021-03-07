@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   addMoviePaper: {
     padding: '1.5rem',
     margin: '1rem'
+  },
+  formTitle: {
+    padding: '2rem'
   }
 }));
 
@@ -101,7 +104,7 @@ function AddMovie() {
 
       {/* Page Title */}
       <Grid item xs={12}>
-        <Typography variant="h2">Add a Movie to the List!</Typography>
+        <Typography className={classes.formTitle} variant="h2">Add a Movie to the List!</Typography>
       </Grid>
 
       {/* Rendered Form Item w/ Buttons */}
