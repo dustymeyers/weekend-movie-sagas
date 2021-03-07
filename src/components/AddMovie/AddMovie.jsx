@@ -34,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+/**
+ * AddMovie Renders the Add Movie Form
+ *
+ * On load, AddMovie uses saga to fetch the list of genres available and store it in redux.
+ * On submission, each input is validated for "clean" data. Implements sweetAlert for validation.
+ * If successful, the user will be routed back to home page on save and will receive a success notification.
+ */
+
 function AddMovie() {
   const classes = useStyles();
   const history = useHistory();
@@ -80,6 +88,7 @@ function AddMovie() {
         dangerMode: true,
       })
       .then((willAdd) => {
+        // if the user hits okay button, dispatch data to saga
         if (willAdd) {
           dispatch({
             type: 'ADD_MOVIE',
@@ -92,7 +101,7 @@ function AddMovie() {
           });
           
           history.push('/');
-        } else {
+        } else { 
           swal("Add a movie when you're ready.");
         }
       });

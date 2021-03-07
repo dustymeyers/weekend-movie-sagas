@@ -24,6 +24,13 @@ const useStyles = makeStyles((theme) => ({
  * MovieDetails Renders the Details of
  * the Movie Poster Previously Clicked
  * 
+ * After user has clicked a Movie Card from MovieList, the id for that movie is used
+ * to change the url to an id specific parameter, simultaneously sending an action to saga.
+ * That action fetches data from the DB specific to that movie and its genre. 
+ * 
+ * useParams has been implemented to re-fetch the movie data should the page be refreshed.
+ * 
+ * "Back to List" Button sends user back home. 
  */
 
 function MovieDetails() {
@@ -32,7 +39,7 @@ function MovieDetails() {
   const history = useHistory();
   const movieId = useParams();
   const movieDetails = useSelector(store => store.movieDetails);
-  console.log('params:', movieId);
+  
   // movieDetails state object as variables
   const movieTitle = movieDetails.title;
   const moviePosterImage = movieDetails.poster;

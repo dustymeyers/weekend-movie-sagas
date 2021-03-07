@@ -42,6 +42,15 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
+/**
+ * Renders List of Movies Added to Database
+ * 
+ * On load, each movie poster/title is rendered by fetching data with saga and setting it to a redux state.
+ * Clicking on one will redirect you to a new page that renders that movie's details.
+ * 
+ * A button is rendered at the top of the page. It directs users to AddMovie form on click. 
+ */
+
 function MovieList() {
     const classes = useStyles();
     const history = useHistory();
@@ -56,17 +65,9 @@ function MovieList() {
       history.push('/addMovie')
     } // end handleAddMovie
 
+    // On poster click, route user to specific MovieDescription page
+    // useEffect and useParams implemented in MovieDetails to fetch relevant data on load
     const handlePosterClick = (movieId) => {
-      console.log('poster clicked', movieId);
-      // sends movieId to our generator function that will
-      // use an axios GET to fetch movie details for movieId
-      // including genres
-      
-      dispatch({ 
-        type: 'FETCH_MOVIE_DETAILS',
-        payload: movieId
-      });
-
       history.push(`/description/${movieId}`);
     } // end handlePosterClick
 
