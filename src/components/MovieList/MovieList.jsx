@@ -18,6 +18,10 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
+  }, 
+  movieCard: {
+    height: 300,
+    padding: 10
   }
 }));
 
@@ -70,7 +74,7 @@ function MovieList() {
                   {movies.map(movie => {
                       return (
                           <Grid item key={movie.id} xs={2}>
-                              <Card elevation={3}>
+                              <Card elevation={3} className={classes.movieCard}>
                                 <h3>{movie.title}</h3>
                                 <img 
                                   className="home-poster-img"
