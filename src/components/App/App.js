@@ -8,6 +8,7 @@ import MovieList from '../MovieList/MovieList';
 
 
 
+
 function App() {
   return (
     <div className="App">
@@ -26,6 +27,8 @@ function App() {
         <Route path="/addMovie">
           <AddMovie />
         </Route>
+
+        {/* TODO Add an Edit page */}
       </Router>
     </div>
   );

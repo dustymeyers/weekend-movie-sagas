@@ -3,6 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
+// Material-Ui
+import { Grid, Button, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  }
+}));
+
 function MovieList() {
 
     const history = useHistory();
@@ -32,7 +42,7 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <main>
+        <Grid>
             <h1>MovieList</h1>
             <button onClick={handleAddMovie}>Add a Movie</button>
             <section className="movies">
@@ -45,7 +55,7 @@ function MovieList() {
                     );
                 })}
             </section>
-        </main>
+        </Grid>
 
     );
 }
