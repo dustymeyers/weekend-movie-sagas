@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   movieListTitle: {
     marginTop: '2rem',
+    marginBottom: '2rem'
   },
   addMovieButton: {
     margin: '2rem'
@@ -87,6 +88,9 @@ function MovieList() {
               <Grid item xs={12}>
                 <Typography align="center" variant="h2" className={classes.movieListTitle}>
                   Your Movie List
+                </Typography>
+                <Typography align="center" variant="h6">
+                  Click on a movie poster or the "Add Movie" button.
                 </Typography>
               </Grid>
 
