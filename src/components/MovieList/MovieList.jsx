@@ -71,15 +71,23 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <Grid container direction="column" className={classes.root} spacing={2}> 
+        <Grid 
+          container 
+          direction="column" 
+          className={classes.root} 
+          spacing={2}
+        > 
           
+          {/* Page specific header (sepperate from App header) */}
           <Grid item xs={12}>
             <Grid justify="center" align="center" container>
 
+              {/* Title */}
               <Grid item xs={12}>
                 <Typography align="center" variant="h2" className={classes.movieListTitle}>Your Movie List</Typography>
               </Grid>
 
+              {/* Add Movie Button, routes to /addMovie on click */}
               <Grid item xs={3} >
                 <Button 
                   className={classes.addMovieButton}
@@ -94,6 +102,7 @@ function MovieList() {
             </Grid>
           </Grid>
 
+          {/* Rendered List of Movie Posters */}
           <Grid item xs={12}>
             <Paper elevation={5} className={classes.listWrapper}>
               <Grid 
@@ -102,31 +111,35 @@ function MovieList() {
                 justify="space-evenly" 
                 spacing={4} 
               >
+
+                {/* Movie Cards Created with Movie Image, Title, and Id */}
                 {movies.map(movie => {
                     return (
                         <Grid item key={movie.id} xs={2}>
                             <Card className={classes.movieCard}>
+
+                              {/* Movie Title */}
                               <CardHeader
                                 title={movie.title}
                               />
+
+                              {/* Movie Poster Image */}
                               <CardMedia
                                 className={classes.media}
                                 image={movie.poster} 
                                 title={movie.title} 
                                 onClick={() => handlePosterClick(movie.id)}
                               />
-  
-                              </Card>
                             
+                            </Card>                            
                         </Grid>
                     );
                 })}
+
               </Grid>
             </Paper>
           </Grid>
-
         </Grid>
-
     );
 }
 
