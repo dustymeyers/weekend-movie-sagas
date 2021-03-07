@@ -3,6 +3,7 @@ import './App.css';
 
 // Components
 import AddMovie from '../AddMovie/AddMovie';
+import EditMovieDetails from '../EditMovieDetails/EditMovieDetails';
 import MovieDetails from '../MovieDetails/MovieDetails';
 import MovieList from '../MovieList/MovieList';
 
@@ -57,6 +58,9 @@ function App() {
           </Route>
 
           {/* TODO Add an Edit page */}
+          <Route path="/edit/:id">
+            <EditMovieDetails />
+          </Route>
         </Router>
       </Grid>
     </Grid>

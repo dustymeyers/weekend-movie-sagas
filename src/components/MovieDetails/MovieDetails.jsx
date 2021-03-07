@@ -53,7 +53,7 @@ function MovieDetails() {
       type: 'FETCH_MOVIE_DETAILS',
       payload: paramsObject.id
     });
-}, []);
+  }, []);
 
   const handleBack = () => {
     console.log('clicked back button');
