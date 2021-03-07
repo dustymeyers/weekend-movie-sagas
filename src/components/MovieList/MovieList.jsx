@@ -4,7 +4,14 @@ import { useHistory } from 'react-router-dom';
 import './MovieList.css'
 
 // Material-Ui
-import { Grid, Button, Paper } from '@material-ui/core';
+import { 
+  Grid, 
+  Button, 
+  Paper, 
+  GridList,
+  GridListTile,
+  GridListTileBar 
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -14,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MovieList() {
-
+    const classes = useStyles();
     const history = useHistory();
     const dispatch = useDispatch();
     const movies = useSelector(store => store.movies);
@@ -42,19 +49,40 @@ function MovieList() {
     } // end handlePosterClick
 
     return (
-        <Grid>
-            <h1>MovieList</h1>
-            <button onClick={handleAddMovie}>Add a Movie</button>
-            <section className="movies">
-                {movies.map(movie => {
-                    return (
-                        <div key={movie.id} >
-                            <h3>{movie.title}</h3>
-                            <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
-                        </div>
-                    );
-                })}
-            </section>
+        <Grid container className={classes.root} spacing={2}> 
+
+          <Grid item xs={12}>
+            <Grid justify="center" container>
+              <Grid item xs={12}>
+                <h1>MovieList</h1>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Button color="primary" onClick={handleAddMovie}>Add a Movie</Button>
+              </Grid>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            
+              <GridList cellHeight="auto" cols={4}>
+                  {movies.map(movie => {
+                      return (
+                          <GridListTile key={movie.id} >
+                              <h3>{movie.title}</h3>
+                              <img src={movie.poster} alt={movie.title} onClick={() => handlePosterClick(movie.id)}/>
+                              {/* <GridListTileBar
+                                title={movie.title}
+                              /> */}
+
+                              
+                          </GridListTile>
+                      );
+                  })}
+              </GridList>
+            
+          </Grid>
+
         </Grid>
 
     );
