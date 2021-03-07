@@ -5,15 +5,17 @@ import swal from 'sweetalert';
 
 // Material-UI
 import {
-  ButtonGroup,
-  FormControl,
-  FormHelperText,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
+  Button,         // replaces <button>
+  ButtonGroup,    // acts as a div for <button>s
+  FormControl,    // acts as a div for individual inputs on a form
+  FormHelperText, // adds text relevant to input below input
+  Grid,           // creates a responsive grid layout, <Grid container> and <Grid item>
+  InputLabel,     // replaces <label>
+  MenuItem,       // replaces <option> in a <select>
+  Paper,          // acts as a div, but gives a raised paper effect
+  Select,         // replaces <select>
+  TextField,      // versatile text input field
+  Typography,     // replaces all <h1>, <h2>, etc.
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -24,8 +26,11 @@ const useStyles = makeStyles((theme) => ({
   },
   addMovieForm: {
     marginTop: '2rem',
+    padding: '1rem'
   },
-  
+  addMoviePaper: {
+    padding: '1.5rem'
+  }
 }));
 
 function AddMovie() {
@@ -66,7 +71,6 @@ function AddMovie() {
     swal({
       title: "Ready to Add?",
       text: "Do you want to look at your submission once more before completion?",
-      icon: "info",
       buttons: true,
       dangerMode: true,
     })
@@ -94,96 +98,121 @@ function AddMovie() {
 
   return(
     <Grid container justify="center">
+      {/* Page Title */}
       <Grid item xs={12}>
         <Typography className={classes.addMovieTitle} variant="h2">Add a Movie to the List!</Typography>
       </Grid>
-      <Grid item xs={12}> 
-        
-          <form /*className={classes.addMovieForm}*/ id="add-movie-form">
-            <Grid container spacing={2}>
-              <Grid item xs={4}>
-                <FormControl fullWidth>
-                  <TextField
-                    helperText="Input a title for the movie"
-                    id="title-input"
-                    margin="normal"
-                    label="Title:" 
-                    variant="outlined"
-                    value={newMovie.title} 
-                    onChange={event => setNewMovie({...newMovie, title: event.target.value})}
-                    type="text" 
-                    placeholder="Title of Movie" 
-                    required
-                  />
-                </FormControl>
-              </Grid>
 
-              <Grid item xs={4}>
-                <FormControl fullWidth> 
-                  <TextField
-                    helperText="Input an image address for the movie poster."
-                    id="poster-input"
-                    label="Poster:"
-                    margin="normal"
-                    variant="outlined"
-                    value={newMovie.poster}
-                    onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
-                    type="url" 
-                    placeholder="Image Address" 
-                    required
-                  />
-                </FormControl>
-              </Grid> 
+      <Grid item>
+        <Paper elevation={5} className={classes.addMoviePaper}>
+          <Grid container>
+            
+            <Grid item xs={12}>
+                <form className={classes.addMovieForm} id="add-movie-form">
+                  <Grid container spacing={2}>
 
-              <Grid item xs={4}>
-                <FormControl fullWidth margin="normal">
-                  <InputLabel margin="normal" shrink id="genre-input-selector">
-                    Genre:
-                  </InputLabel>
+                    <Grid item xs={4}>
+                      <FormControl fullWidth>
+                        <TextField
+                          helperText="Input a title for the movie"
+                          id="title-input"
+                          margin="normal"
+                          label="Title:" 
+                          variant="outlined"
+                          value={newMovie.title} 
+                          onChange={event => setNewMovie({...newMovie, title: event.target.value})}
+                          type="text" 
+                          placeholder="Title of Movie" 
+                          required
+                        />
+                      </FormControl>
+                    </Grid>
 
-                  <Select
-                    
-                    labelId="genre-input-selector"
-                    value={newMovie.genre_id} 
-                    onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
-                    displayEmpty
-                    required
-                  >
+                    <Grid item xs={4}>
+                      <FormControl fullWidth> 
+                        <TextField
+                          helperText="Input an image address for the movie poster."
+                          id="poster-input"
+                          label="Poster:"
+                          margin="normal"
+                          variant="outlined"
+                          value={newMovie.poster}
+                          onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
+                          type="url" 
+                          placeholder="Image Address" 
+                          required
+                        />
+                      </FormControl>
+                    </Grid> 
 
-                    <MenuItem value="">
-                      <em>Choose a Genre</em>
-                    </MenuItem>
+                    <Grid item xs={4}>
+                      <FormControl fullWidth margin="normal">
+                        <InputLabel margin="normal" shrink id="genre-input-selector">
+                          Genre:
+                        </InputLabel>
 
-                    {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
+                        <Select
+                          
+                          labelId="genre-input-selector"
+                          value={newMovie.genre_id} 
+                          onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
+                          displayEmpty
+                          required
+                        >
 
-                  </Select>
-                  <FormHelperText>Choose a genre for the movie.</FormHelperText>
-                </FormControl>
-              </Grid>
+                          <MenuItem value="">
+                            <em>Choose a Genre</em>
+                          </MenuItem>
 
-              <Grid item xs={12}>  
-                <FormControl fullWidth color="secondary">
-                  <TextField
-                    helperText="Input a brief movie synopsys."
-                    id="description-input"
-                    margin="normal"     
-                    label="Description:"
-                    value={newMovie.description}
-                    onChange={event => setNewMovie({...newMovie, description: event.target.value})}
-                    placeholder="Movie Description" 
-                    multiline
-                    rows={4}
-                    required
-                    variant="outlined"
-                  />
-                </FormControl>
-              </Grid>
+                          {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
+
+                        </Select>
+                        <FormHelperText>Choose a genre for the movie.</FormHelperText>
+                      </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12}>  
+                      <FormControl fullWidth color="secondary">
+                        <TextField
+                          helperText="Input a brief movie synopsys."
+                          id="description-input"
+                          margin="normal"     
+                          label="Description:"
+                          value={newMovie.description}
+                          onChange={event => setNewMovie({...newMovie, description: event.target.value})}
+                          placeholder="Movie Description" 
+                          multiline
+                          rows={4}
+                          required
+                          variant="outlined"
+                        />
+                      </FormControl>
+                    </Grid>
+
+                  </Grid>
+                </form>       
             </Grid>
-          </form>
-        
+
+            <Grid item xs={12}>
+              <ButtonGroup variant="contained">
+
+                <Button 
+                  color="secondary" 
+                  form="add-movie-form" 
+                  onClick={handleCancelButton}
+                >
+                  Cancel
+                </Button>
+
+                <Button color="primary" onClick={saveMovie}>Save</Button>
+
+              </ButtonGroup>
+            </Grid>
+
+          </Grid>
+        </Paper>
       </Grid>
-      <button form="add-movie-form" onClick={handleCancelButton}>Cancel</button>
-      <button onClick={saveMovie}>Save</button>
+
     </Grid>
   );
 } // end AddMovie
