@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%',
   },
   movieListTitle: {
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    padding: '1rem',
   }
 
 }));
