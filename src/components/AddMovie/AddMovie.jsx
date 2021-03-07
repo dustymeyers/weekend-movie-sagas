@@ -3,8 +3,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 
+// Material-UI
+import {
+  ButtonGroup,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+
+}));
 
 function AddMovie() {
+  const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
   const genres = useSelector(store => store.genres);
@@ -68,59 +85,80 @@ function AddMovie() {
   } // end saveMovie
 
   return(
-    <>
-      <h2>Add a Movie to the List!</h2>
-      <form id="add-movie-form">
-        <label>
-          Add the Movie's Title:
-          <input 
-            value={newMovie.title} 
-            onChange={event => setNewMovie({...newMovie, title: event.target.value})}
-            type="text" 
-            placeholder="Title of Movie" 
-            required
-          />
-        </label>
-
-        <label>
-          Upload the Movie's Poster:
-          <input 
-            value={newMovie.poster}
-            onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
-            type="url" 
-            placeholder="Image Address" 
-            required
-          />
-        </label>
+    <Grid container justify="center">
+      <Grid item xs={12}>
+        <Typography variant="h2">Add a Movie to the List!</Typography>
+      </Grid>
+      <Grid item xs={12}> 
         
-        <label>
-          Add the Movie's Genre:
-          <select 
-            value={newMovie.genre_id} 
-            onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
-            required
-          >
-            <option value="" disabled>Pick One</option>
-            {genres.map(genre => <option key={genre.id} value={genre.id}>{genre.name}</option>)}
-          </select>
-        </label>
+          <FormControl id="add-movie-form">
+            <Grid container>
+              
+              <Grid item xs={4}>
+                <TextField
+                  label="Title:" 
+                  variant="outlined"
+                  value={newMovie.title} 
+                  onChange={event => setNewMovie({...newMovie, title: event.target.value})}
+                  type="text" 
+                  placeholder="Title of Movie" 
+                  required
+                />
+              </Grid>
 
-        <br/>
-        <label>
-          Add the Movie's Description:
-          <textarea 
-            value={newMovie.description}
-            onChange={event => setNewMovie({...newMovie, description: event.target.value})}
-            placeholder="Movie Description" 
-            rows="4" 
-            cols ="50"
-            required
-          ></textarea>
-        </label>
-      </form>
+              <Grid item xs={4}>
+                <TextField
+                  label="Poster:"
+                  variant="outlined"
+                  value={newMovie.poster}
+                  onChange={event => setNewMovie({...newMovie, poster: event.target.value})}
+                  type="url" 
+                  placeholder="Image Address" 
+                  required
+                />
+              </Grid>           
+            
+              <Grid item xs={4}>
+                <InputLabel shrink id="genre-input-selector">
+                  Genre:
+                </InputLabel>
+
+                <Select
+                  labelId="genre-input-selector"
+                  value={newMovie.genre_id} 
+                  onChange={event => setNewMovie({...newMovie, genre_id: event.target.value})}
+                  displayEmpty
+                  required
+                >
+
+                  <MenuItem value="">
+                    <em>Choose a Genre</em>
+                  </MenuItem>
+
+                  {genres.map(genre => <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>)}
+
+                </Select>
+              </Grid>
+        
+              <Grid item xs={12}>  
+                <TextField
+                  label="Description:"
+                  value={newMovie.description}
+                  onChange={event => setNewMovie({...newMovie, description: event.target.value})}
+                  placeholder="Movie Description" 
+                  multiline
+                  rows={4}
+                  required
+                  variant="outlined"
+                />
+              </Grid>
+            </Grid>
+          </FormControl>
+        
+      </Grid>
       <button form="add-movie-form" onClick={handleCancelButton}>Cancel</button>
       <button onClick={saveMovie}>Save</button>
-    </>
+    </Grid>
   );
 } // end AddMovie
 
